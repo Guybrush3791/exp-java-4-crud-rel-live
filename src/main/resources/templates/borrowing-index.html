@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>Borrowings:</h1>
+	<a href="/borrowings/create">BORROW A BOOK</a>
+	<ul>
+		<li
+			th:each="borrowing : ${borrowings}"
+			th:object="${borrowing}"
+		>
+			[[ *{name} ]] [[ *{lastname} ]] --> [[ *{book.title} ]]
+			<a th:href="@{/borrowings/update/{id} (id=*{id})}">EDIT</a>
+		</li>
+	</ul>
+</body>
+</html>

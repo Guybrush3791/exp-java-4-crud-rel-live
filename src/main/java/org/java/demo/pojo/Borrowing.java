@@ -57,6 +57,7 @@ public class Borrowing {
 	@Override
 	public String toString() {
 			
-		return "[" + getId() + "] " + getName() + " " + getLastname();
+		return "[" + getId() + "] " + getName() + " " 
+				+ getLastname() + " " + getBook().getTitle();
 	}
 }

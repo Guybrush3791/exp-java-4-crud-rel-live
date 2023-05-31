@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body th:object="${borrowing}">
+	<h1>Borrowing create:</h1>
+	<form method="POST">
+		<label>Name</label>
+		<input type="text" name="name" th:value="*{name}">
+		<br>
+		<label>Lastname</label>
+		<input type="text" name="lastname" th:value="*{lastname}">
+		<br>
+		<select name="book">
+			<option 
+				th:each="book : ${books}"
+				th:object="${book}" 
+				th:value="*{id}"
+			>
+				[[ *{title} ]]
+			</option>
+		</select>
+		<br>
+		<input type="submit" value="create">
+	</form>
+</body>
+</html>

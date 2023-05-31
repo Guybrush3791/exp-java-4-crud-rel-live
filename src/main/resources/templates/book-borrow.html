@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body th:object="${borrowing}">
+	<h1>Book borrow:</h1>
+	<form action="/books/borrow/create" method="POST">
+		<label>Name</label>
+		<input type="text" name="name" th:value="*{name}">
+		<br>
+		<label>Lastname</label>
+		<input type="text" name="lastname" th:value="*{lastname}">
+		<br>
+		<input type="text" th:value="*{book.id}" name="book" hidden>
+		<input type="submit" value="borrow">
+	</form>
+</body>
+</html>
