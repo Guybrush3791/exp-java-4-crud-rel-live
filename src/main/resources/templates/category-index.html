@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>Categories:</h1>
+	<a href="/categories/create">CREATE NEW CATEGORY</a>
+	<ul>
+		<li
+			th:each="category : ${categories}"
+			th:object="${category}"
+		>
+			[[ *{name} ]] - 
+			<a th:href="@{/categories/update/{id} (id=*{id})}">EDIT</a>
+			<br>
+			<h4>Books: [[ *{books.size()} ]]</h4>
+			<ul>
+				<li
+					th:each="book : *{books}"
+					th:object="${book}"
+				>
+					[[ *{title} ]]
+				</li>
+			</ul>
+		</li>
+	</ul>	
+</body>
+</html>

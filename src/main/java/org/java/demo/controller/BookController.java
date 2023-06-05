@@ -4,8 +4,10 @@ import java.util.List;
 
 import org.java.demo.pojo.Book;
 import org.java.demo.pojo.Borrowing;
+import org.java.demo.pojo.Category;
 import org.java.demo.serv.BookServ;
 import org.java.demo.serv.BorrowingServ;
+import org.java.demo.serv.CategoryServ;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,6 +27,9 @@ public class BookController {
 	@Autowired
 	private BorrowingServ borrowingServ;
 	
+	@Autowired
+	private CategoryServ categoryServ;
+	
 	@GetMapping
 	public String getBookIndex(Model model) {
 		
@@ -32,6 +37,50 @@ public class BookController {
 		model.addAttribute("books", books);
 		
 		return "book-index";
+	}
+	
+	@GetMapping("/create")
+	public String getBookForm(Model model) {
+		
+		List<Category> categories = categoryServ.findAll();
+		
+		model.addAttribute("book", new Book());
+		model.addAttribute("categories", categories);
+	
+		return "book-create";
+	}
+	@PostMapping("/create")
+	public String storeNewBook(
+			@ModelAttribute Book book
+		) {
+		
+		bookServ.save(book);
+		
+		return "redirect:/books";
+	}
+	
+	@GetMapping("/update/{id}")
+	public String getBookUpdateForm(
+			Model model,
+			@PathVariable int id
+		) {
+		
+		List<Category> categories = categoryServ.findAll();
+		Book book = bookServ.findById(id).get();
+		
+		model.addAttribute("categories", categories);
+		model.addAttribute("book", book);
+		
+		return "book-update";
+	}
+	@PostMapping("/update/{id}")
+	public String storeUpdatedBook(
+			@ModelAttribute Book book
+		) {
+		
+		bookServ.save(book);
+		
+		return "redirect:/books";
 	}
 	
 	@GetMapping("/borrow/{id}")

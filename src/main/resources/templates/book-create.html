@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body th:object="${book}">
+	<h1>Book create:</h1>
+	<form method="POST">
+		<label>Title</label>
+		<input type="text" name="title" th:value="*{title}">
+		<br>
+		<label>author</label>
+		<input type="text" name="author" th:value="*{author}">
+		<br>
+		<label>Release date</label>
+		<input type="date" name="releaseDate" th:value="*{releaseDate}">
+		<br>
+		<div
+			th:each="category : ${categories}"
+			th:object="${category}"
+		>
+			<input th:id="${'category-' + category.id}" th:value="*{id}" type="checkbox" name="categories">
+			<label th:for="${'category-' + category.id}">[[ *{name} ]]</label>
+		</div>
+		<input type="submit" value="CREATE">
+	</form>
+</body>
+</html>
